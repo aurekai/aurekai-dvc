@@ -1,0 +1,58 @@
+stages:
+  doctor_deep:
+    cmd: bash scripts/doctor-deep.sh
+    deps:
+      - scripts/doctor-deep.sh
+      - .release-versions.env
+    outs:
+      - artifacts/doctor-report.json
+
+  manifest_verify:
+    cmd: bash scripts/manifest-verify.sh examples/sample-aurekai.manifest.json
+    deps:
+      - scripts/manifest-verify.sh
+      - examples/sample-aurekai.manifest.json
+    outs:
+      - artifacts/manifest-verify.json
+
+  model_memory_pack:
+    cmd: bash scripts/model-memory-pack.sh examples/sample-akmodel.json
+    deps:
+      - scripts/model-memory-pack.sh
+      - examples/sample-akmodel.json
+    outs:
+      - artifacts/model-memory-pack.json
+
+  sae_audit:
+    cmd: bash scripts/sae-audit.sh
+    deps:
+      - scripts/sae-audit.sh
+    outs:
+      - artifacts/sae-audit.json
+
+  semantic_cache_bench:
+    cmd: bash scripts/semantic-cache-bench.sh
+    deps:
+      - scripts/semantic-cache-bench.sh
+    outs:
+      - artifacts/semantic-cache-bench.json
+
+  proof_bundle_export:
+    cmd: bash scripts/proof-bundle-export.sh
+    deps:
+      - scripts/proof-bundle-export.sh
+    outs:
+      - artifacts/proof-bundle.json
+
+  release_gate:
+    cmd: bash scripts/release-gate.sh
+    deps:
+      - scripts/release-gate.sh
+      - artifacts/doctor-report.json
+      - artifacts/manifest-verify.json
+      - artifacts/model-memory-pack.json
+      - artifacts/sae-audit.json
+      - artifacts/semantic-cache-bench.json
+      - artifacts/proof-bundle.json
+    outs:
+      - artifacts/release-gate.json

@@ -4,10 +4,14 @@
 
 # aurekai-dvc
 
-Aurekai integration surface for Dvc.
+Aurekai integration surface for DVC with reproducible artifact pipelines for model memory, manifests, SAE audits, semantic cache benchmarks, proof bundles, and release gates.
 
-Status: planned
-Type: data
+Status: active
+Type: data-ml
+
+## Overview
+
+aurekai-dvc provides a complete dvc.yaml stage graph and executable scripts to produce verifiable artifact outputs in artifacts directory. It supports local script validation even when dvc is not installed.
 
 ## Core Template Set
 
@@ -18,6 +22,15 @@ Type: data
 - semantic-cache-bench
 - proof-bundle-export
 - release-gate
+
+## Quick Start
+
+python3 -m pip install -r requirements.txt
+bash tests/validate-scripts.sh
+
+If dvc is installed:
+
+dvc repro
 
 ## Canonical References
 
